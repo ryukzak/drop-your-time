@@ -1,0 +1,7 @@
+(env
+ (dev
+  (flags :standard -w -69-34-32-26)))
+
+(tests
+ (names test_backend test_schemes)
+ (libraries backend alcotest yojson))

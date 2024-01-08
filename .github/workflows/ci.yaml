@@ -1,0 +1,84 @@
+name: drop-your-time CI
+
+on:
+  pull_request:
+
+
+jobs:
+  backend-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up OCaml
+        uses: ocaml/setup-ocaml@v2.2.2
+        with:
+          ocaml-compiler: 5.1
+          dune-cache: true
+
+      - name: Install libev
+        run: sudo apt-get install -y libev-dev
+
+      - name: Install dependencies
+        run: opam install --deps-only --locked .
+
+      - name: Build project
+        run: opam exec -- make build
+
+      - name: Run tests
+        run: opam exec -- make test
+
+      - name: Check formatting
+        run: opam exec -- make fmt-check
+
+  frontend-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Prepare java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Install clojure tools
+        uses: DeLaGuardo/setup-clojure@12.3
+        with:
+          cli: 1.11.1.1429
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 21
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: make build
+
+      - run: make fmt-check
+
+      - run: make lint
+
+  doc-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: markdownlint-cli
+        uses: nosborn/github-action-markdown-cli@v3.3.0
+        with:
+          files: "**/*.md"
+          config_file: .markdownlint.yaml
+          dot: true

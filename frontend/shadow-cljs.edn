@@ -1,0 +1,12 @@
+{:deps true
+
+ :nrepl {:port 9000
+         :middleware [cljr-suppress-middleware-warnings]}
+
+ :builds
+ {:app {:target :browser
+        :output-dir "target/js"
+        :asset-path "/js"
+        :modules {:main {:init-fn drop-your-time.router/init}}
+        :closure-defines {drop-your-time.conf/DEBUG true}
+        :release {:closure-defines {drop-your-time.conf/DEBUG false}}}}}

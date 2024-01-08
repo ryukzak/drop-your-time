@@ -1,0 +1,14 @@
+.DS_Store
+.clj-kondo
+.lsp
+.nrepl-port
+
+backend/*.sqlite
+backend/_build
+
+frontend/.calva
+frontend/.cpcache
+frontend/.shadow-cljs
+frontend/dist
+frontend/node_modules
+frontend/target

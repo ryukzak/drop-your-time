@@ -1,0 +1,25 @@
+(env
+ (dev
+  (flags :standard -w -69-34-32)))
+
+(library
+ (name backend)
+ (libraries
+  dream
+  yojson
+  base
+  ppx_deriving_yojson.runtime
+  caqti-driver-sqlite3
+  ppx_rapper_lwt
+  alcotest
+  uuidm)
+ (inline_tests)
+ (preprocess
+  (pps
+   lwt_ppx
+   ppx_inline_test
+   ppx_rapper
+   ppx_deriving.show
+   ppx_jane
+   ppx_assert
+   ppx_deriving_yojson)))
