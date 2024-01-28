@@ -1,0 +1,39 @@
+(lang dune 3.12)
+
+(name backend)
+
+(generate_opam_files true)
+
+(source
+ (github username/reponame))
+
+(authors "Author Name")
+
+(maintainers "Maintainer Name")
+
+(license BSD-3-Clause)
+
+(documentation https://url/to/documentation)
+
+(package
+ (name backend)
+ (synopsis "A short synopsis")
+ (description "A longer description")
+ (depends
+  dune
+  ocaml
+  ocamlformat
+
+  alcotest
+  caqti-driver-sqlite3
+  dream
+  uuidm
+  
+  ppx_deriving_yojson
+  ppx_inline_test
+  ppx_jane
+  ppx_rapper
+  ppx_rapper_lwt
+  ppx_yojson_conv)
+ (tags
+  (topics "to describe" your project)))

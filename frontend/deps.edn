@@ -1,0 +1,24 @@
+{:deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        org.clojure/clojurescript {:mvn/version "1.11.60"}
+
+        com.taoensso/tempura {:mvn/version "1.5.3"}
+        cljs-http/cljs-http {:mvn/version "0.1.48"}
+
+        reagent/reagent {:mvn/version "1.2.0"}
+        reagent-utils/reagent-utils {:mvn/version "0.3.8"}
+
+        venantius/accountant {:mvn/version "0.2.5"}
+        bidi/bidi {:mvn/version "2.1.6"}
+
+        clj-kondo/clj-kondo {:mvn/version "2023.10.20"}
+        dev.weavejester/cljfmt {:mvn/version "0.11.2"}
+        cider/cider-nrepl {:mvn/version "0.44.0"}
+
+        refactor-nrepl/refactor-nrepl {:mvn/version "3.9.1"}
+        thheller/shadow-cljs {:mvn/version "2.26.5"}}
+
+ :aliases {:lint {:main-opts ["-m" "clj-kondo.main" "--lint" "src" "--config" "deps.edn"]}
+           :fmt {:main-opts ["-m" "cljfmt.main"]}
+           :cljs {:extra-deps {thheller/shadow-cljs {:mvn/version "2.26.5"}}}}
+
+ :source-paths ["src"]}
